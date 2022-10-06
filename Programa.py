@@ -84,7 +84,8 @@ class app(Tk):
     def CCdeterminante(self):
         matriz1 =  self.MObjeto_MNumero()
         respuesta = "D: "
-        respuesta = respuesta+str(np.linalg.det(matriz1))
+        # respuesta = respuesta+str(np.linalg.det(matriz1))
+        respuesta = respuesta+str(determinanteDeMatriz(matriz1))
         
 
         self.labelR = Label(self.v2,text=respuesta);self.labelR.place(x=150,y=10)   
@@ -97,6 +98,14 @@ class app(Tk):
             for j in range(0,self.tamanio):
                 casilla = Entry(self.v2, text="0",width=1);casilla.place(x=(i+5),y=(j+5))
                 resultado = self.matriz.clip(array, )"""
+    
+    def determinanteDeMatriz(matriz):
+        pass
+
+    def obtenerSubMatriz2x2(): # Brandon
+        pass
+    def obtenerDeterminante2x2(matriz): # Brandon
+        pass
 
 a = app()
 a.mainloop()
