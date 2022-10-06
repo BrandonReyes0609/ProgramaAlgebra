@@ -100,9 +100,22 @@ class app(Tk):
                 resultado = self.matriz.clip(array, )"""
     
     def determinanteDeMatriz(matriz):
+        largo = matriz[0].length;
+        if largo == 1:
+            return matriz[0][1];
+        
+        padre = [[1 for x in range(0, largo+1)] for x in range(0, largo+1)]
+        return determinanteDeMatriz(matriz, padre)
         pass
 
-    def obtenerSubMatriz2x2(): # Brandon
+    def determinanteDeMatriz(matriz, anterior):
+        if largo == 2:
+            return obtenerDeterminante2x2(matriz)
+        
+
+    def obtenerSubMatriz2x2(matriz): # Nicolle
+        pass
+    def obtenerIntDe(matriz): # José Ángel
         pass
     def obtenerDeterminante2x2(matriz): # Brandon
         pass
