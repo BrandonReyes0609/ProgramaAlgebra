@@ -2,6 +2,64 @@ from tkinter import Entry, Place, Tk, Label, Button, messagebox
 from turtle import width
 import numpy as np
 
+
+def determinanteDeMatriz(matriz):
+    largo = len(matriz[0]);
+    if largo == 1:
+        return matriz[0][1];
+    
+    anterior = [[1 for x in range(0, largo+1)] for x in range(0, largo+1)]
+    return determinante_Matriz(matriz, anterior)
+
+def determinante_Matriz(matriz, anterior):
+    largo = len(matriz[0]);
+    if largo == 2:
+        return obtenerDeterminante2x2(matriz)
+
+    # Crea una matriz de (n-1)x(n-1) de tamaño llena de 0's
+    # Los 0's serán cambiados por los valores obtenidos de las determinantes mas abajo.
+    reducida = [[0 for x in range(0, largo -1)] for x in range(0, largo - 1)]
+    renglonesConCeroEnMedio = []
+    renglonSinCeroEnMedio = []
+    subMatrices = obtenerSubMatrices2x2(matriz);
+    intAnterior = obtenerIntDe(anterior);
+    for i in largo - 1:
+        for j in largo - 1:
+            reducida[i][j] = obtenerDeterminante2x2(subMatrices[i][j]) / intAnterior[i][j]
+            esCero = reducida[i][j] == 0
+            perteneceARenglonesExtremos = i == 1 or i == largo - 1
+            perteneceAColumnasExtremas = j == 1 or j == largo - 1
+            if esCero and not perteneceARenglonesExtremos and not perteneceAColumnasExtremas:
+                renglonesConCeroEnMedio.append(i)
+        if renglonesConCeroEnMedio.count(i) == 0:
+            renglonSinCeroEnMedio = reducida[i]
+
+    # Si todos tienen un cero en medio, la determinante no puede ser obtenida, pues no se puede dividir entre 0.
+    if len(renglonesConCeroEnMedio) == largo - 1:
+        return None
+    # Los renglones con 0's en medio, deben ser sumados con otros renglones para eliminar el 0.
+    if len(renglonesConCeroEnMedio) != 0:
+        for i in renglonesConCeroEnMedio:
+            for j in len(reducida[i]):
+                reducida[i][j] += renglonSinCeroEnMedio[j]
+    
+    return determinante_Matriz(reducida, matriz)
+
+
+    
+
+def obtenerSubMatrices2x2(matriz): # Nicolle
+    # Obtiene una lista de todas las matrices de 2x2 dentro de la matriz especificada
+    # Una matriz es una lista de renglones y un renglon es una lista de números.
+    pass
+def obtenerIntDe(matriz): # José Ángel
+    # Obtiene la matriz int() de la matriz especificada.
+    # Una matriz es una lista de renglones y un renglon es una lista de números.
+    pass
+def obtenerDeterminante2x2(matriz): # Brandon
+    # Obtiene la determinante de una matriz 2x2 especificada.
+    # Una matriz es una lista de renglones y un renglon es una lista de números.
+    pass
 class app(Tk):
     def __init__(self):
         Tk.__init__(self)
