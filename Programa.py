@@ -15,6 +15,9 @@ class app(Tk):
         self.ncolumnas = self.tamanio
         self.nfilas = self.tamanio
         ncasillas = self.tamanio*self.tamanio
+        global ncolumnas, nfilas
+        ncolumnas = self.ncolumnas
+        nfilas = self.nfilas
         #messagebox.showinfo("Si","Funciona el boton")
         self.v2 = Tk()
         #self.v2.geometry("1000x1000")
@@ -23,7 +26,7 @@ class app(Tk):
         #----------------------------
         self.bcalcular = Button(self.v2,text="Resolver",command=self.CCdeterminante);self.bcalcular.place(x=10,y=10)
         #-----------------------------
-        self.bborrar = Button(self.v2,text="Borrar");self.bborrar.place(x=100,y=10)
+        self.bborrar = Button(self.v2,text="Borrar",command=self.obtenerDeterminante2x2);self.bborrar.place(x=100,y=10)
         self.mm = []
         for fila in range(self.nfilas):
             self.mm.append([])
@@ -85,8 +88,8 @@ class app(Tk):
         matriz1 =  self.MObjeto_MNumero()
         respuesta = "D: "
         # respuesta = respuesta+str(np.linalg.det(matriz1))
-        respuesta = respuesta+str(determinanteDeMatriz(matriz1))
-        
+        #respuesta = respuesta+str(determinanteDeMatriz(matriz1))
+        print(self.obtenerDeterminante2x2(matriz1))
 
         self.labelR = Label(self.v2,text=respuesta);self.labelR.place(x=150,y=10)   
         #self.labelR.config(textvariable=respuesta)     
@@ -102,10 +105,26 @@ class app(Tk):
     def determinanteDeMatriz(matriz):
         pass
 
-    def obtenerSubMatriz2x2(): # Brandon
+    def obtenerSubMatriz2x2(matriz): # Brandon
+        
+        #array de sub matrices 2x2
         pass
-    def obtenerDeterminante2x2(matriz): # Brandon
-        pass
+    def obtenerDeterminante2x2(self,matriz): # Brandon
+        # la forma de la matriz debe ser [[1,2],[3,4]]
+        matriz = matriz# solo obtiene el vvalor de la matriz
+        n00 = matriz[0][0]# obtiene la posicion de arriba izquierda
+        n01 = matriz[0][1]#obtiene la posicion arriba derecha
+        n10 = matriz[1][0]# obtiene la posicion abajo izquierda0
+        n11 = matriz[1][1]#obtiene la posición derecha abajo
+
+        print("n00: "+str(n00))# immprime valor para verificar
+        print("n01: "+str(n01))# immprime valor para verificar
+        print("n10: "+str(n10))# immprime valor para verificar
+        print("n11: "+str   (n11))# immprime valor para verificar
+
+        determinate = (n00*n11)-(n01*n10)# hace la resta de valores para la determinate
+        print(determinate)# imprime la determinante
+        return determinate#retrona la determinante
 
 a = app()
 a.mainloop()
