@@ -13,6 +13,9 @@ def determinanteDeMatriz(matriz):
 
 
 def determinante_Matriz(matriz, anterior):
+    print("Anterior:\n", np.matrix(anterior))
+    print("Matriz:\n", np.matrix(matriz))
+
     largo = len(matriz[0])
     largoReducida = largo - 1
     transpuestaMatriz = obtenerTranspuestaDe(matriz)
@@ -34,6 +37,7 @@ def determinante_Matriz(matriz, anterior):
             reducida[i][j] = obtenerDeterminante2x2(
                 subMatrices[i*largoReducida + j]) / intAnterior[i][j]
 
+    print("Reducida:\n", np.matrix(reducida))
     # Si todos tienen un cero en medio, la determinante no puede ser obtenida, pues no se puede dividir entre 0.
     if determinanteSera0(reducida) or determinanteSera0(obtenerTranspuestaDe(reducida)):
         return 0
@@ -82,6 +86,7 @@ def eliminarCerosDeIntDe(matriz):
                 continue
             renglonesSinCeroEnCelda = obtenerRenglonesSinCeroEnCelda(
                 matriz, jCelda)
+            print("Renglón ", iFila + 1, "+", renglonesSinCeroEnCelda[0] + 1)
             sumarRenglonARenglonB(matriz, iFila, renglonesSinCeroEnCelda[0])
 
 
